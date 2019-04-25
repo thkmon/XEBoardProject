@@ -1,0 +1,13 @@
+.button {
+	border: 1px solid #a1a1a1;
+	padding: 4px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.button [type="submit"],
+.button [type="button"] {
+	border: 0px;
+	background-color: #FFFFFF;
+	cursor: pointer;
+}
