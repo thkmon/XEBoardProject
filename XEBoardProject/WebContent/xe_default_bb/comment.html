@@ -73,7 +73,7 @@
 					</dl>
 					<!--@end-->
 		
-					<div class="option">
+					<div class="option" style="padding-top: 5px; padding-bottom: 5px;">
 						<!--@if($comment->isGranted() || !$comment->get('member_srl'))-->
 							<a href="{getUrl('act','dispBoardDeleteComment','comment_srl',$comment->comment_srl)}" class="button small"><span>{$lang->cmd_delete}</span></a>
 							<a href="{getUrl('act','dispBoardModifyComment','comment_srl',$comment->comment_srl)}" class="button small"><span>{$lang->cmd_modify}</span></a> 

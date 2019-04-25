@@ -21,7 +21,7 @@ $_SESSION['upload_info'][$editor_sequence]->upload_target_srl = $upload_target_s
 	<!-- 이미지 업로드 -->
 	<!--div cond="!$document_srl" id="mUpload"-->
 	<div id="mUpload">
-		<button type="button" onclick="jQuery('#Filedata').click()">그림업로드</button>
+		<button type="button" class="button" onclick="jQuery('#Filedata').click()">그림업로드</button>
 		<!--form name="form" action="" method="POST" enctype="multipart/form-data" style="display: none">-->
 			<input id="Filedata" type="file" name="Filedata" style="display: none" onchange="ajaxFileUpload()" />
 		<!--</form-->
