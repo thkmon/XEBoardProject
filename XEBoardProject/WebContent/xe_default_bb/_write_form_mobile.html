@@ -1,0 +1,30 @@
+<!-- Mobile Upload
+	Source : http://www.phpletter.com/
+	For XE : http://www.userpin.org/
+	Modify & UI : http://sketchbooks.co.kr/
+	문제
+	1. 파일이름에 작은따옴표가 들어가는 경우 에러
+-->
+
+<load target="js/editor_m.js" />
+<load target="js/ajaxfileupload.js" type="body" />
+
+{@
+include_once(_XE_PATH_.'/modules/file/file.class.php');
+include_once(_XE_PATH_.'/modules/file/file.controller.php');
+$oFileController = &getController('file');
+$editor_sequence = '1';
+$oFileController->setUploadInfo($editor_sequence, $upload_target_srl);
+$_SESSION['upload_info'][$editor_sequence]->enabled = true;
+$_SESSION['upload_info'][$editor_sequence]->upload_target_srl = $upload_target_srl;
+}
+	<!-- 이미지 업로드 -->
+	<!--div cond="!$document_srl" id="mUpload"-->
+	<div id="mUpload">
+		<button type="button" onclick="jQuery('#Filedata').click()">그림업로드</button>
+		<!--form name="form" action="" method="POST" enctype="multipart/form-data" style="display: none">-->
+			<input id="Filedata" type="file" name="Filedata" style="display: none" onchange="ajaxFileUpload()" />
+		<!--</form-->
+	</div>
+	<br>
+	<br>
