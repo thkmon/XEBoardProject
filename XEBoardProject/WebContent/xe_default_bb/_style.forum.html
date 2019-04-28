@@ -1,6 +1,19 @@
 <form action="./" method="get" class="boardListForm">
     <fieldset>
         <legend>List of Articles</legend>
+        
+		<!--@if($module_info->use_category == "Y")-->
+		<span class="jumpTo">
+			<select name="category" id="board_category" onchange="doChangeCategory(); return false;" style="margin-bottom: 10px;">
+				<option value="">{$lang->category}</option>
+				<!--@foreach($category_list as $val)-->
+				<option value="{$val->category_srl}" <!--@if($category==$val->category_srl)-->selected="selected"<!--@end-->>{str_repeat("&nbsp;&nbsp;",$val->depth)} {$val->title} <!--@if($val->document_count)-->({$val->document_count})<!--@end--></option>
+				<!--@end-->
+			</select>
+            <!-- <button type="button" name="go_button" id="go_button" onclick="doChangeCategory(); return false;" class="button">Go</button> -->
+		</span>
+		<!--@end-->
+		
         <table cellspacing="0" border="1" summary="List of Articles" class="boardList">
 		<thead>
 			{@ $no_line_class = " no_line" }
@@ -13,18 +26,6 @@
 				<!--@end-->
 	
 				<th scope="col" class="title">
-					
-					<!--@if($module_info->use_category == "Y")-->
-                    <span class="jumpTo">
-						<select name="category" id="board_category">
-							<option value="">{$lang->category}</option>
-							<!--@foreach($category_list as $val)-->
-							<option value="{$val->category_srl}" <!--@if($category==$val->category_srl)-->selected="selected"<!--@end-->>{str_repeat("&nbsp;&nbsp;",$val->depth)} {$val->title} <!--@if($val->document_count)-->({$val->document_count})<!--@end--></option>
-							<!--@end-->
-						</select>
-                        <button type="button" name="go_button" id="go_button" onclick="doChangeCategory(); return false;" class="button">Go</button>
-					</span>
-					<!--@end-->
 					{$lang->topic}
 				</th>
 				<th scope="col"><a href="{getUrl('sort_index','last_update','order_type',$order_type)}">{$lang->last_post}<!--@if($sort_index=='last_update')--><img src="./images/common/{$order_icon}" alt="sort" width="5" height="3" class="sort" /><!--@end--></a></th>

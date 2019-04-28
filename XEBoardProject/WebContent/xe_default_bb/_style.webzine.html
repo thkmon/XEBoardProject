@@ -1,7 +1,19 @@
 <form action="./" method="get" class="boardListForm">
     <fieldset>
         <legend>List of Articles</legend>
-
+        
+		<!--@if($module_info->use_category == "Y")-->
+		<span class="jumpTo">
+            <select name="category" id="board_category" onchange="doChangeCategory(); return false;" style="margin-bottom: 10px;">
+                <option value="" >{$lang->category}</option>
+                <!--@foreach($category_list as $val)-->
+                <option value="{$val->category_srl}" <!--@if($category==$val->category_srl)-->selected="selected"<!--@end-->>{str_repeat("&nbsp;&nbsp;",$val->depth)} {$val->title} <!--@if($val->document_count)-->({$val->document_count})<!--@end--></option>
+                <!--@end-->
+            </select>
+            <!-- <button type="button" name="go_button" id= "go_button" onclick="doChangeCategory(); return false;" class="button">Go</button> -->
+        </span>
+        <!--@end-->
+        
         {@ $_col_count = 2; }
         <!--@if($module_info->display_number!='N')-->{@ $_col_count++ }<!--@end-->
         <!--@if($grant->manager)-->{@ $_col_count++}<!--@end-->
@@ -21,18 +33,6 @@
                 <!--@if($grant->manager)--><th scope="col"><input type="checkbox" onclick="XE.checkboxToggleAll({ doClick:true }); return false;" /></th>{@ $no_line_class=""}<!--@end-->
 
                 <th scope="col" class="title">
-
-                    <!--@if($module_info->use_category == "Y")-->
-                    <span class="jumpTo">
-                        <select name="category" id="board_category">
-                            <option value="" >{$lang->category}</option>
-                            <!--@foreach($category_list as $val)-->
-                            <option value="{$val->category_srl}" <!--@if($category==$val->category_srl)-->selected="selected"<!--@end-->>{str_repeat("&nbsp;&nbsp;",$val->depth)} {$val->title} <!--@if($val->document_count)-->({$val->document_count})<!--@end--></option>
-                            <!--@end-->
-                        </select>
-                        <button type="button" name="go_button" id= "go_button" onclick="doChangeCategory(); return false;" class="button">Go</button>
-                    </span>
-                    <!--@end-->
                     {$lang->title}
                 </th>
                 <!--@if($module_info->display_author!='N')--><th scope="col">{$lang->writer}</th><!--@end-->

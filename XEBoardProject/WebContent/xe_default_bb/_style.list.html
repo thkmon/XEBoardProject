@@ -2,6 +2,18 @@
     <fieldset>
         <legend>List of Articles</legend>
 
+		<!--@if($module_info->use_category == "Y")-->
+        <span class="jumpTo">
+			<select name="category" id="board_category" onchange="doChangeCategory(); return false;" style="margin-bottom: 10px;">
+                <option value="">{$lang->category}</option>
+                <!--@foreach($category_list as $val)-->
+                <option value="{$val->category_srl}" <!--@if($category==$val->category_srl)-->selected="selected"<!--@end-->>{str_repeat("&nbsp;&nbsp;",$val->depth)} {$val->title} <!--@if($val->document_count)-->({$val->document_count})<!--@end--></option>
+                <!--@end-->
+            </select>
+            <!-- <button type="button" name="go_button" id="go_button" onclick="doChangeCategory(); return false;" class="button">Go</button> -->
+        </span>
+        <!--@end-->
+         
         <table cellspacing="0" border="1" summary="List of Articles" class="boardList">
         <thead>
             <tr>
@@ -17,17 +29,7 @@
                             <th scope="col">{$lang->no}</th>
                         <!--@elseif($val->type == 'title')-->
                             <th scope="col" class="title">
-                                <!--@if($module_info->use_category == "Y")-->
-                                <span class="jumpTo">
-                                    <select name="category" id="board_category">
-                                        <option value="">{$lang->category}</option>
-                                        <!--@foreach($category_list as $val)-->
-                                        <option value="{$val->category_srl}" <!--@if($category==$val->category_srl)-->selected="selected"<!--@end-->>{str_repeat("&nbsp;&nbsp;",$val->depth)} {$val->title} <!--@if($val->document_count)-->({$val->document_count})<!--@end--></option>
-                                        <!--@end-->
-                                    </select>
-                                    <button type="button" name="go_button" id="go_button" onclick="doChangeCategory(); return false;" class="button">Go</button>
-                                </span>
-                                <!--@end-->
+                                
                                 {$lang->title}
                             </th>
                         <!--@elseif($val->type == 'regdate')-->
