@@ -2,6 +2,7 @@
 <load target="login.xml" />
 <load target="default.login.js" />
 <form id="fo_login_widget" action="{getUrl('','act','procMemberLogin')}" method="post" ruleset="@login" class="account">
+	<a href="{getUrl('act','dispMemberSignUpForm')}" style="margin-right: 5px;">{$lang->cmd_signup}</a>
 	<a href="#acField">{$lang->cmd_login}</a>
 	<fieldset id="acField">
 		<h2>{$lang->cmd_login}</h2>
