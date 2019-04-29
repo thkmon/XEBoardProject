@@ -34,9 +34,9 @@
 /* Board List */
 .boardList{ border-color:#ddd;}
 .boardList .jumpTo button{ background-color:transparent; background-image:url(../images/common/buttonBg2byte.gif);}
-.boardList tr.notice{ background:#f8f8f8;}
-.boardList tr.bg1{ background:#fff;}
-.boardList tr.bg2{ background:#fbfbfb;}
+/* .boardList tr.notice{ background:#f8f8f8;} */
+/* .boardList tr.bg1{ background:#fff;} */
+/* .boardList tr.bg2{ background:#fbfbfb;} */
 .boardList th{ border-color:#fff; color:#333; background-color:#fff; background-image:url(../images/white/bgThDefault.gif);}
 .boardList th a{ color:#1978AD;}
 .boardList td{ border-color:#eee; color:#666;}

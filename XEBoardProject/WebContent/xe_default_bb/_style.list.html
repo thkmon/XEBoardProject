@@ -26,16 +26,16 @@
 
                         <!--// 컨텐츠 종류에 따라서 출력 -->
                         <!--@if($val->type == 'no')-->
-                            <th scope="col">{$lang->no}</th>
+                            <th scope="col" class="sideInfo">{$lang->no}</th>
                         <!--@elseif($val->type == 'title')-->
                             <th scope="col" class="title">
                                 
                                 {$lang->title}
                             </th>
                         <!--@elseif($val->type == 'regdate')-->
-                            <th scope="col"><a href="{getUrl('sort_index','regdate','order_type',$order_type)}">{$lang->date}<!--@if($sort_index=='regdate')--><img src="./images/common/{$order_icon}" alt="sort" width="5" height="3" class="sort" /><!--@end--></a></th>
+                            <th scope="col" class="sideInfo"><a href="{getUrl('sort_index','regdate','order_type',$order_type)}">{$lang->date}<!--@if($sort_index=='regdate')--><img src="./images/common/{$order_icon}" alt="sort" width="5" height="3" class="sort" /><!--@end--></a></th>
                         <!--@elseif($val->type == 'last_update')-->
-                            <th scope="col"><a href="{getUrl('sort_index','last_update','order_type',$order_type)}">{$lang->last_update}<!--@if($sort_index=='last_update')--><img src="./images/common/{$order_icon}" alt="sort" width="5" height="3" class="sort" /><!--@end--></a></th>
+                            <th scope="col" class="sideInfo"><a href="{getUrl('sort_index','last_update','order_type',$order_type)}">{$lang->last_update}<!--@if($sort_index=='last_update')--><img src="./images/common/{$order_icon}" alt="sort" width="5" height="3" class="sort" /><!--@end--></a></th>
                         <!--@elseif($val->type == 'nick_name')-->
                             <th scope="col">{$lang->writer}</th>
                         <!--@elseif($val->type == 'user_id')-->
@@ -43,9 +43,9 @@
                         <!--@elseif($val->type == 'user_name')-->
                             <th scope="col">{$lang->user_name}</th>
                         <!--@elseif($val->type == 'readed_count')-->
-                            <th scope="col"><a href="{getUrl('sort_index','readed_count','order_type',$order_type)}">{$lang->readed_count}<!--@if($sort_index=='readed_count')--><img src="./images/common/{$order_icon}" alt="sort" width="5" height="3" class="sort" /><!--@end--></a></th>
+                            <th scope="col" class="sideInfo"><a href="{getUrl('sort_index','readed_count','order_type',$order_type)}">{$lang->readed_count}<!--@if($sort_index=='readed_count')--><img src="./images/common/{$order_icon}" alt="sort" width="5" height="3" class="sort" /><!--@end--></a></th>
                         <!--@elseif($val->type == 'voted_count')-->
-                            <th scope="col"><a href="{getUrl('sort_index','voted_count','order_type',$order_type)}">{$lang->voted_count}<!--@if($sort_index=='voted_count')--><img src="./images/common/{$order_icon}" alt="sort" width="5" height="3" class="sort" /><!--@end--></a></th>
+                            <th scope="col" class="sideInfo"><a href="{getUrl('sort_index','voted_count','order_type',$order_type)}">{$lang->voted_count}<!--@if($sort_index=='voted_count')--><img src="./images/common/{$order_icon}" alt="sort" width="5" height="3" class="sort" /><!--@end--></a></th>
                         <!--@end-->
                     <!--// 사용자 선언 확장변수일 경우 -->
                     <!--@else-->
@@ -66,7 +66,7 @@
         <!--@else-->
         
             <!--@foreach($notice_list as $no => $document)-->
-                <tr class="notice">
+                <tr class="notice notice_tr">
                     <!--@if($grant->manager)-->
                         <td class="check"><input type="checkbox" name="cart" value="{$document->document_srl}" onclick="doAddDocumentCart(this)" <!--@if($document->isCarted())-->checked="checked"<!--@end--> /></td>
                     <!--@end-->
@@ -79,9 +79,9 @@
 
                             <!--// 컨텐츠 종류에 따라서 출력 -->
                             <!--@if($val->type == 'no')-->
-                                <td class="notice"><!--@if($document_srl == $document->document_srl)-->&raquo;<!--@else-->{$lang->notice}<!--@end--></td>
+                                <td class="notice sideInfo"><!--@if($document_srl == $document->document_srl)-->&raquo;<!--@else-->{$lang->notice}<!--@end--></td>
                             <!--@elseif($val->type == 'title')-->
-                                <td class="title">
+                                <td class="title" style="cursor: pointer;" onclick="goToDocument('{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}');">
                                     
                                     <!--@if($module_info->use_category == "Y" && $document->get('category_srl'))-->
                                     <strong class="category">{$category_list[$document->get('category_srl')]->title}</strong>
@@ -100,9 +100,9 @@
                                     {$document->printExtraImages(60*60*$module_info->duration_new)}
                                 </td>
                             <!--@elseif($val->type == 'regdate')-->
-                                <td class="date">{$document->getRegdate('Y-m-d')}</td>
+                                <td class="date sideInfo">{$document->getRegdate('Y-m-d')}</td>
                             <!--@elseif($val->type == 'last_update')-->
-                                <td class="date">{zdate($document->get('last_update'),'Y-m-d H:i')}</td>
+                                <td class="date sideInfo">{zdate($document->get('last_update'),'Y-m-d H:i')}</td>
                             <!--@elseif($val->type == 'nick_name')-->
                                 <td class="author"><a href="#popup_menu_area" class="member_{$document->get('member_srl')}" onclick="return false">{$document->getNickName()}</a></td>
                             <!--@elseif($val->type == 'user_id')-->
@@ -110,9 +110,9 @@
                             <!--@elseif($val->type == 'user_name')-->
                                 <td class="author">{$document->getUserName()}</a></td>
                             <!--@elseif($val->type == 'readed_count')-->
-                                <td class="reading">{$document->get('readed_count')>0?$document->get('readed_count'):'&nbsp;'}</td>
+                                <td class="reading sideInfo">{$document->get('readed_count')>0?$document->get('readed_count'):'&nbsp;'}</td>
                             <!--@elseif($val->type == 'voted_count')-->
-                                <td class="recommend">{$document->get('voted_count')!=0?$document->get('voted_count'):'&nbsp;'}</td>
+                                <td class="recommend sideInfo">{$document->get('voted_count')!=0?$document->get('voted_count'):'&nbsp;'}</td>
                             <!--@end-->
 
                         <!--// 사용자 선언 확장변수일 경우 -->
@@ -122,7 +122,26 @@
                     <!--@end-->
                 </tr>
             <!--@end-->
-
+			
+			<script>
+				function goToDocument(_url) {
+					location.href = _url;
+				}
+			</script>
+			<style>
+				@media (min-width: 700px) {
+					.sideInfo {
+						display: ;
+					}
+				}
+				
+				@media (max-width: 699px) {
+					.sideInfo {
+						display: none;
+					}
+				}
+			</style>
+			
             <!--@foreach($document_list as $no => $document)-->
                 <tr class="bg{($no+1)%2+1}">
                     <!--@if($grant->manager)--><td class="checkbox"><input type="checkbox" name="cart" value="{$document->document_srl}" onclick="doAddDocumentCart(this)" <!--@if($document->isCarted())-->checked="checked"<!--@end--> /></td><!--@end-->
@@ -134,9 +153,9 @@
 
                             <!--// 컨텐츠 종류에 따라서 출력 -->
                             <!--@if($val->type == 'no')-->
-                                <td class="num"><!--@if($document_srl == $document->document_srl)-->&raquo;<!--@else-->{$no}<!--@end--></td>
+                                <td class="num sideInfo"><!--@if($document_srl == $document->document_srl)-->&raquo;<!--@else-->{$no}<!--@end--></td>
                             <!--@elseif($val->type == 'title')-->
-                                <td class="title">
+                                <td class="title" style="cursor: pointer;" onclick="goToDocument('{getUrl('document_srl',$document->document_srl, 'listStyle', $listStyle, 'cpage','')}');">
                                     <!--@if($module_info->use_category == "Y" && $document->get('category_srl'))-->
                                     <strong class="category">{$category_list[$document->get('category_srl')]->title}</strong>
                                     <!--@end-->
@@ -160,13 +179,13 @@
                             <!--@elseif($val->type == 'user_name')-->
                                 <td class="author">{$document->getUserName()}</a></td>
                             <!--@elseif($val->type == 'regdate')-->
-                                <td class="date">{$document->getRegdate('Y-m-d')}</td>
+                                <td class="date sideInfo">{$document->getRegdate('Y-m-d')}</td>
                             <!--@elseif($val->type == 'last_update')-->
-                                <td class="date">{zdate($document->get('last_update'),'Y-m-d H:i')}</td>
+                                <td class="date sideInfo">{zdate($document->get('last_update'),'Y-m-d H:i')}</td>
                             <!--@elseif($val->type == 'readed_count')-->
-                                <td class="reading">{$document->get('readed_count')>0?$document->get('readed_count'):'&nbsp;'}</td>
+                                <td class="reading sideInfo">{$document->get('readed_count')>0?$document->get('readed_count'):'&nbsp;'}</td>
                             <!--@elseif($val->type == 'voted_count')-->
-                                <td class="recommend">{$document->get('voted_count')!=0?$document->get('voted_count'):'&nbsp;'}</td>
+                                <td class="recommend sideInfo">{$document->get('voted_count')!=0?$document->get('voted_count'):'&nbsp;'}</td>
                             <!--@end-->
 
                         <!--// 사용자 선언 확장변수일 경우 -->
